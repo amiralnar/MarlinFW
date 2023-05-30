@@ -42,7 +42,7 @@
 //
 // Servos
 //
-#define SERVO0_PIN         PA1
+#define SERVO0_PIN         -1
 
 //
 // Limit Switches
@@ -60,7 +60,7 @@
 // Filament Runout Sensor
 //
 #ifndef FIL_RUNOUT_PIN
-  #define FIL_RUNOUT_PIN   PC2
+  #define FIL_RUNOUT_PIN   -1
 #endif
 
 //
@@ -152,7 +152,7 @@
 #define HEATER_0_PIN       PC8   // EXTRUDER
 #define HEATER_BED_PIN     PC9   // BED
 #define FAN_PIN            PA8
-
+#define FAN1_PIN           PC2
 //
 // USB connect control
 //
@@ -173,7 +173,7 @@
  */
 #if HAS_SPI_LCD
   #define BEEPER_PIN       PA15
-  #define BTN_ENC          PB6
+  #define BTN_ENC          -1
 
   #if ENABLED(CR10_STOCKDISPLAY)
 
@@ -206,9 +206,20 @@
     #define DOGLCD_MOSI  PB7
     #define FORCE_SOFT_SPI
     #define LCD_BACKLIGHT_PIN -1
+  
+  #elif ENABLED(ZONESTAR_LCD)     // ANET A8 LCD Controller - Must convert to 3.3V - CONNECTING TO 5V WILL DAMAGE THE BOARD!
+
+    #define LCD_PINS_RS     PB9
+    #define LCD_PINS_ENABLE PB7
+    #define LCD_PINS_D4     PB8
+    #define LCD_PINS_D5     PA10
+    #define LCD_PINS_D6     PA9
+    #define LCD_PINS_D7     PA15
+    #define ADC_KEYPAD_PIN  PA1    //CONNECTING TO 5V WILL DAMAGE THE BOARD!
+
 
   #else
-    #error "Only CR10_STOCKDISPLAY and MKS_MINI_12864 are currently supported on the BIGTREE_SKR_E3_DIP."
+    #error "Only CR10_STOCKDISPLAY, ZONESTAR_LCD and MKS_MINI_12864 are currently supported on the BIGTREE_SKR_E3_DIP."
   #endif
 
 #endif // HAS_SPI_LCD
